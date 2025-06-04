@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Luminescent Forest of Tomorrow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Raleway:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: radial-gradient(ellipse at top left, #232526 0%, #414345 100%);
+      color: #fff0f5;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Forest stars and fireflies */
+    .stars-bg {
+      background: radial-gradient(#444 1px, transparent 1px);
+      background-size: 40px 40px;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      animation: shimmer 20s linear infinite;
+    }
+    @keyframes shimmer {
+      from { background-position: 0 0; }
+      to { background-position: 100% 100%; }
+    }
+    .firefly {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #e0ffe0;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #90ee90;
+      animation: float 5s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      50% { transform: translateY(-20px) translateX(10px); opacity: 0.6; }
+      100% { transform: translateY(0) translateX(0); opacity: 1; }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      font-size: 3em;
+      color: #ffcce0;
+      margin-top: 40px;
+      text-shadow: 0 0 20px #ff9ecb, 0 0 60px #fff0f5;
+      letter-spacing: 2px;
+    }
+
+    .section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.5em;
+      font-family: 'Great Vibes', cursive;
+      color: #ffe0f0;
+      margin-bottom: 30px;
+    }
+
+    .forest-lights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+    }
+
+    .light {
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #90ee90;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #baffc9;
+      transition: all 0.3s ease;
+    }
+
+    .light:hover {
+      background: rgba(144, 238, 144, 0.1);
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 0 25px #90ee90, 0 0 40px #fff;
+    }
+
+    .poem {
+      font-style: italic;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5em;
+      color: #ffcce0;
+      padding: 30px 0;
+      line-height: 1.6;
+    }
+
+    .glow-path {
+      margin-top: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .step {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px dashed #ffb6c1;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 240px;
+      box-shadow: 0 0 15px #ffcce0;
+      transition: 0.3s;
+    }
+
+    .step:hover {
+      background: rgba(255, 182, 193, 0.1);
+      box-shadow: 0 0 25px #ffb6c1, 0 0 50px #fff0f5;
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #90ee90;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2em;
+    }
+
+    /* Love Cycle & Green Flags Styles */
+    #hearts-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 100px;
+      padding-bottom: 100px;
+    }
+
+    .love-cycle {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      animation: rotate 20s linear infinite;
+      margin-bottom: 30px;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .circle-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px dashed rgba(144, 238, 144, 0.4);
+      border-radius: 50%;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+
+    .item {
+      position: absolute;
+      width: 140px;
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #ffffff;
+      transition: all 0.4s ease;
+      text-shadow: 0 0 6px #b0ffcb;
+      cursor: default;
+      background: rgba(255,255,255,0.03);
+      border-radius: 20px;
+      padding: 8px 0;
+      box-shadow: 0 0 8px #baffc9, 0 0 0 transparent;
+    }
+
+    .item:hover {
+      transform: scale(1.15) rotate(-10deg);
+      color: #ff9ecb;
+      text-shadow: 0 0 15px #ff9ecb;
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 0 18px #ffb6c1, 0 0 30px #fff0f5;
+    }
+
+    .item span {
+      display: block;
+      font-size: 1.8em;
+    }
+
+    .fight { top: 0; left: 50%; transform: translateX(-50%); }
+    .fix { top: 25%; right: 0; transform: translateY(-50%); }
+    .stay { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .love { top: 25%; left: 0; transform: translateY(-50%); }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.1em;
+      color: #eaffea;
+      text-shadow: 0 0 10px #ffb7da;
+      animation: fadeIn 2s ease-in-out;
+      transition: transform 0.3s, color 0.3s;
+      cursor: pointer;
+      background: rgba(255,255,255,0.07);
+      border-radius: 30px;
+      padding: 10px 0;
+      box-shadow: 0 0 12px #ffb6c1, 0 0 0 transparent;
+    }
+    .center-text:hover {
+      transform: translate(-50%, -50%) scale(1.08) rotate(-2deg);
+      color: #ffb6c1;
+      text-shadow: 0 0 18px #ffb6c1, 0 0 30px #fff0f5;
+      background: rgba(255,255,255,0.15);
+      box-shadow: 0 0 18px #ffb6c1, 0 0 30px #fff0f5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    .green-flags {
+      max-width: 900px;
+      padding: 40px 20px;
+      background: linear-gradient(120deg, #232526 60%, #2e2e2e 100%);
+      border-radius: 24px;
+      box-shadow: 0 0 30px rgba(0,255,127,0.13);
+      margin-bottom: 30px;
+    }
+
+    .flags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .flag {
+      background: #2e2e2e;
+      border: 2px solid #90ee90;
+      color: #90ee90;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 1em;
+      transition: 0.3s ease;
+      cursor: default;
+      box-shadow: 0 0 8px rgba(144, 238, 144, 0.5);
+      position: relative;
+      overflow: visible;
+      font-family: 'Raleway', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .flag::before {
+      content: "💚";
+      position: absolute;
+      left: -22px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1em;
+      filter: drop-shadow(0 0 4px #90ee90);
+      opacity: 0.8;
+    }
+    .flag:hover {
+      background: #90ee90;
+      color: #1e1e1e;
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 0 18px #90ee90, 0 0 30px #baffc9;
+    }
+    
+    .romantic-intro {
+      background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+      color: #ffe0f0;
+      text-align: center;
+      padding: 60px 30px;
+      font-family: 'Great Vibes', cursive;
+      border-top: 2px dashed #ff93c2;
+      border-bottom: 2px dashed #ff93c2;
+      margin-bottom: 60px;
+      box-shadow: 0 0 30px rgba(255, 182, 193, 0.2);
+    }
+    
+    .romantic-intro h2 {
+      font-size: 2.5em;
+      color: #ffcce0;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px #ff9ecb;
+    }
+    
+    .romantic-intro p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      font-family: 'Raleway', sans-serif;
+      margin: 10px 0;
+      color: #fff0f5;
+    }
+    
+    .romantic-intro .tagline {
+      margin-top: 25px;
+      font-style: italic;
+      color: #ffb6c1;
+      font-size: 1.4em;
+      animation: glowText 3s infinite alternate;
+    }
+    
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #ff93c2; }
+      to { text-shadow: 0 0 20px #ffb6c1; }
+    }
+
+    .quote-carousel {
+      margin: 40px auto 0;
+      max-width: 600px;
+      text-align: center;
+    }
+    #quoteText {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.7em;
+      color: #ffcce0;
+      text-shadow: 0 0 8px #ffb6c1;
+      transition: opacity 0.5s;
+      min-height: 2.5em;
+    }
+
+    @media (max-width: 600px) {
+      .love-cycle {
+        width: 95vw;
+        height: 95vw;
+        min-width: 220px;
+        min-height: 220px;
+        max-width: 98vw;
+        max-height: 98vw;
+      }
+      .item, .center-text {
+        font-size: 1em;
+        width: 120px;
+        padding: 6px 0;
+      }
+      .center-text {
+        width: 150px;
+        font-size: 1.2em;
+      }
+      .green-flags {
+        padding: 20px 5px;
+      }
+      .romantic-intro {
+        padding: 30px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <canvas id="hearts-bg"></canvas>
+  <h1>Luminescent Forest of Tomorrow</h1>
+
+  <!-- Fireflies -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const fly = document.createElement('div');
+      fly.className = 'firefly';
+      fly.style.top = Math.random() * window.innerHeight + 'px';
+      fly.style.left = Math.random() * window.innerWidth + 'px';
+      fly.style.animationDuration = (3 + Math.random() * 5) + 's';
+      document.body.appendChild(fly);
+    }
+  </script>
+
+  <section class="section">
+    <h2>🌸 The Lights We Follow Together 🌸</h2>
+    <div class="forest-lights">
+      <div class="light">Trust that sparkles in silence</div>
+      <div class="light">Laughter echoing in twilight</div>
+      <div class="light">Shared dreams, softly glowing</div>
+      <div class="light">Touch that heals gently</div>
+      <div class="light">Promise whispered in petals</div>
+      <div class="light">Eyes that say "I'm home"</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🌷 A Poem From The Heart 🌷</h2>
+    <div class="poem">
+      "In the quiet woods of forever,<br />
+      Where your hand finds mine like a promise,<br />
+      We walk a path no map can draw,<br />
+      Lit by the glow of moments only we know."
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💫 Our Glowing Path 💫</h2>
+    <div class="glow-path">
+      <div class="step">✨ We met under starry skies</div>
+      <div class="step">🌙 We stayed even through the rain</div>
+      <div class="step">🌿 We grew like wildflowers in spring</div>
+      <div class="step">🎇 We glowed even in the dark</div>
+    </div>
+  </section>
+
+  <footer>
+    💕 In every step, your heart lights the forest of my tomorrow. 💕
+  </footer>
+
+  <div class="wrapper">
+
+    <!-- Love Cycle Section -->
+    <div class="love-cycle">
+      <div class="circle-ring"></div>
+      <div class="item fight"><span>🎀</span>we fight</div>
+      <div class="item fix"><span>🎀</span>we fix</div>
+      <div class="item stay"><span>🎀</span>we stay</div>
+      <div class="item love"><span>🎀</span>we love</div>
+      <div class="center-text" id="cycleText">💖 love is a cycle 💖</div>
+    </div>
+
+    <!-- Green Flags Section -->
+    <div class="green-flags">
+        <h2 style="text-align:center;color:#90ee90;margin-bottom: inherit;" margin-down:="">🌿 Green Flags 🌿</h2>      
+        <div class="flags-grid">
+        <div class="flag">responsible</div>
+        <div class="flag">matured</div>
+        <div class="flag">loyal</div>
+        <div class="flag">faithful</div>
+        <div class="flag">good listener</div>
+        <div class="flag">sweet</div>
+        <div class="flag">caring</div>
+        <div class="flag">funny</div>
+        <div class="flag">loving</div>
+        <div class="flag">supportive</div>
+        <div class="flag">know sidewalk rule</div>
+        <div class="flag">marunong magluto</div>
+        <div class="flag">family oriented</div>
+        <div class="flag">understanding</div>
+        <div class="flag">walang bisyo</div>
+        <div class="flag">marespeto</div>
+      </div>
+    </div>
+    
+    <section class="romantic-intro">
+      <div class="inner">
+        <h2>🌹 To Love is to Grow Together 🌹</h2>
+        <p>
+          In a world full of fleeting moments,<br />
+          we choose permanence—<br />
+          to fight, to fix, to stay, and to love, again and again.
+        </p>
+        <p>
+          It's not about being perfect,<br />
+          but about being perfectly committed.<br />
+          Through the chaos and calm, we remain—<br />
+          a soft place to land, a heart to hold.
+        </p>
+        <p class="tagline">
+          💕 This is us. Our love, our promise. Forever growing. 💕
+        </p>
+      </div>
+    </section>
+
+    <!-- Romantic Quote Carousel -->
+    <section class="quote-carousel">
+      <div id="quoteText">
+        "Love is not just looking at each other, it's looking in the same direction."
+      </div>
+    </section>
+    
+  </div>
+
+  <script>
+    // Fireflies already handled above
+
+    // Animated floating hearts background
+    const canvas = document.getElementById('hearts-bg');
+    const ctx = canvas.getContext('2d');
+    let hearts = [];
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function Heart() {
+      this.x = Math.random() * canvas.width;
+      this.y = canvas.height + 20;
+      this.size = 16 + Math.random() * 16;
+      this.speed = 0.5 + Math.random();
+      this.alpha = 0.5 + Math.random() * 0.5;
+      this.amp = 20 + Math.random() * 20;
+      this.phase = Math.random() * Math.PI * 2;
+      this.draw = function() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.translate(this.x + Math.sin(this.y/40 + this.phase)*this.amp, this.y);
+        ctx.rotate(Math.sin(this.y/80 + this.phase)/4);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-this.size/2, -this.size/2, -this.size, this.size/3, 0, this.size);
+        ctx.bezierCurveTo(this.size, this.size/3, this.size/2, -this.size/2, 0, 0);
+        ctx.fillStyle = "#ffb6c1";
+        ctx.shadowColor = "#ff93c2";
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      };
+      this.update = function() {
+        this.y -= this.speed;
+        if (this.y < -30) {
+          this.x = Math.random() * canvas.width;
+          this.y = canvas.height + 20;
+        }
+      };
+    }
+    for (let i = 0; i < 30; i++) hearts.push(new Heart());
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let h of hearts) {
+        h.update();
+        h.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Love cycle text animation
+    const texts = [
+      "💖 love is a cycle 💖",
+      "🎀 we fight 💢",
+      "💡 we fix things",
+      "🫶 we stay strong",
+      "❤️ we love again",
+      "🌸 we grow together",
+      "✨ we cherish every moment"
+    ];
+    let i = 0;
+    const el = document.getElementById("cycleText");
+
+    setInterval(() => {
+      i = (i + 1) % texts.length;
+      el.style.opacity = 0;
+      setTimeout(() => {
+        el.textContent = texts[i];
+        el.style.opacity = 1;
+      }, 400);
+    }, 3000);
+
+    // Romantic quote carousel
+    const quotes = [
+      `"Love is not just looking at each other, it's looking in the same direction."`,
+      `"In you, I've found the love of my life and my closest, truest friend."`,
+      `"Every love story is beautiful, but ours is my favorite."`,
+      `"To love and be loved is to feel the sun from both sides."`,
+      `"You are my today and all of my tomorrows."`,
+      `"I love you more than yesterday, but less than tomorrow."`,
+      `"With you, every ordinary moment becomes extraordinary."`
+    ];
+    let q = 0;
+    const quoteEl = document.getElementById("quoteText");
+    setInterval(() => {
+      quoteEl.style.opacity = 0;
+      setTimeout(() => {
+        q = (q + 1) % quotes.length;
+        quoteEl.textContent = quotes[q];
+        quoteEl.style.opacity = 1;
+      }, 500);
+    }, 5000);
+  </script>
+</body>
+</html>
